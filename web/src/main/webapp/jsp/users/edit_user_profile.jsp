@@ -37,6 +37,7 @@
                                         <input type="date" name="userDetails.birthDate" class="form-style" id="birthDate" value="<c:out value="${user.userDetails.birthDate}"/>">
                                         <i class="input-icon uil uil-user"></i>
                                     </div>
+
                                     <div class="form-group mt-3">
                                         <label for="email">Your Email</label>
                                         <input type="email" name="email" class="form-style" id="email" value="<c:out value="${user.email}"/>">
@@ -47,11 +48,11 @@
 <%--                                        <input readonly name="password" class="form-style" id="password"  value="<c:out value="${user.password}"/>">--%>
 <%--                                        <i class="input-icon uil uil-lock-alt"></i>--%>
 <%--                                    </div>--%>
-                                        <div>
-                                        <input readonly type="text" name="role" class="form-style"
-                                               id="roleEnum" value="<c:out value="${user.roleEnum}" />">
-                                        <i class="input-icon uil uil-users-alt"></i>
-                                        </div>
+<%--                                        <div>--%>
+<%--                                            <input readonly type="text" name="role" class="form-style"--%>
+<%--                                                   id="roleEnum" value="<c:out value="${user.roleEnum}" />">--%>
+<%--                                            <i class="input-icon uil uil-users-alt"></i>--%>
+<%--                                        </div>--%>
                                     <button class="btn mt-4-primary btn-lg" type="submit">Update</button>
                                      </div>
                                  </form>

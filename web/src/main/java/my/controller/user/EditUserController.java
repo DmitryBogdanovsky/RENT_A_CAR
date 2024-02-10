@@ -18,33 +18,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @Secured({"ROLE_ADMIN", "ROLE_USER"})
 public class EditUserController {
+
     @Autowired
     ModelMapper modelMapper;
 
     @Autowired
     UserService userService;
 
-//    @GetMapping("/edit-userProfile/{userId}.view")
-//    public String userProfile(Model model) {
-//
-//        UserResponseDto userResponseDto = userService.findUser();
-//        model.addAttribute("user", userResponseDto);
-//        System.out.println("Get mapping:" + userResponseDto);
-//        return "users/edit_user_profile";
-//    }
-
     @GetMapping("/edit-userProfile/{userId}.view")
-    public String editUserProfile(@PathVariable Integer userId, Model model) {
-        UserResponseDto user = userService.findUserById(userId);
-        model.addAttribute("user", new UserRequestDto(
-                user.getId(),
-                user.getEmail(),
-                "",
-                user.getUserDetails()
-        ));
-        System.out.println("Get mapping:" + user);
+    public String userProfile(Model model) {
+
+        UserResponseDto userResponseDto = userService.findUser();
+        model.addAttribute("user", userResponseDto);
+        System.out.println("User Id: " + userService);
+        System.out.println("Get mapping:" + userResponseDto);
         return "users/edit_user_profile";
     }
+
+//    @GetMapping("/edit-userProfile/{userId}.view")
+//    public String editUserProfile(@PathVariable Integer userId, Model model) {
+//        UserResponseDto user = userService.findUserById(userId);
+//        model.addAttribute("user", new UserRequestDto(
+//                user.getId(),
+//                user.getEmail(),
+//                "",
+//                user.getUserDetails()
+//        ));
+//        System.out.println("Get mapping:" + user);
+//        return "users/edit_user_profile";
+//    }
 
     @PostMapping("/edit-userProfile/{userId}.action")
     public String editUser(@PathVariable(required = true) Integer userId,

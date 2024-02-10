@@ -1,5 +1,6 @@
 package my.controller.car;
 
+import lombok.RequiredArgsConstructor;
 import my.service.BrandCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ListBrandController {
     @Autowired
     BrandCarService brandCarService;
