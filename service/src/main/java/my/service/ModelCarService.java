@@ -7,16 +7,11 @@ import java.util.List;
 
 public interface ModelCarService {
 
-
     ModelCarDto addModelCar(ModelCarDto newModelCarDto);
-
 
     ModelCarDto updateModelCar(ModelCarDto updateModelCarDto);
 
-
     void deleteModelCar(Integer id);
-
-
 
     ModelCarDto findModelCarById(Integer id);
 
