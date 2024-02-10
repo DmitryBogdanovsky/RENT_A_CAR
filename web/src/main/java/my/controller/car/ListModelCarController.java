@@ -2,7 +2,6 @@ package my.controller.car;
 
 
 import lombok.RequiredArgsConstructor;
-import my.dao.ModelCarRepository;
 import my.dto.car.BrandCarDto;
 import my.dto.car.ModelCarDto;
 import my.service.BrandCarService;
@@ -11,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ public class ListModelCarController {
     private final ModelCarService modelCarService;
 
     @GetMapping("model-list.view")
-    public String ModelListView(Model model){
+    public String ModelListView(Model model) {
         Map<Integer, String> brandCars = brandCarService.findAllBrandsCarPages(0, 100).stream()
                 .collect(Collectors.toMap(BrandCarDto::getId, BrandCarDto::getBrandName));
 
@@ -46,11 +48,32 @@ public class ListModelCarController {
         }
 
         model.addAttribute("brand", currentBrandCar);
-        model.addAttribute("brands", brandCars);
-        model.addAttribute("models", modelCars);
-        return "car/list_model";
+        model.addAttribute("brandCars", brandCars);
+        model.addAttribute("modelCars", modelCars);
+        return "car/model-list";
 
     }
 
+    @PostMapping("model-list")
+    public String modelList(@ModelAttribute("brand") BrandCarDto currentBrandCar,
+                            BindingResult bindingResult, Model model) {
+
+        Map<Integer, String> brandCars = brandCarService.findAllBrandsCarPages(0, 100).stream()
+                .collect(Collectors.toMap(BrandCarDto::getId, BrandCarDto::getBrandName));
+
+        List<ModelCarDto> modelCarDto;
+
+        if (brandCars.size() > 0) {
+            modelCarDto = modelCarService.findAllModelsPagesByBrandCar(currentBrandCar.getId(), 0, 100);
+        } else {
+            modelCarDto = new ArrayList<>();
+        }
+
+        model.addAttribute("brand", currentBrandCar);
+        model.addAttribute("brands", brandCars);
+        model.addAttribute("models", modelCarDto);
+
+        return "car/list_model";
+    }
 
 }

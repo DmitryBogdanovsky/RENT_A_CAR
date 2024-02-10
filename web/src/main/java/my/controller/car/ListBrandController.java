@@ -15,8 +15,6 @@ public class ListBrandController {
     @Autowired
     BrandCarService brandCarService;
 
-
-
     @GetMapping("brand-list.view")
     public String brandList(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         model.addAttribute("page", page);
