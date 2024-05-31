@@ -35,7 +35,8 @@ public class ShowCarController {
 
         OrderRequestDto orderRequestDto = new OrderRequestDto();
         // TODO: do we need it?
-        orderRequestDto.setCarId(new CarDto(carId));
+//        orderRequestDto.setCarId(new CarDto(carId));
+//        orderRequestDto.setCarId(new CarDto(carId));
 
         model.addAttribute("car", carDto);
         model.addAttribute("images", imageCars);
@@ -68,7 +69,7 @@ public class ShowCarController {
             return "car/show_car";
         }
 
-        orderRequest.setCarId(new CarDto(carId));
+//        orderRequest.setCarId(new CarDto(carId));
         orderService.addOrder(orderRequest);
 
         model.addAttribute("messageBox",
